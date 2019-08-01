@@ -6,7 +6,7 @@ import rospy, copy, time
 from newZed import Zed_converter
 from sensor_msgs.msg import LaserScan, Joy, Image
 from ackermann_msgs.msg import AckermannDriveStamped
-from color_segmentation import cd_color_segmentation
+#from color_segmentation import cd_color_segmentation
 from cv_bridge import CvBridge, CvBridgeError
 class statematch:
     SCAN_TOPIC = "/scan"
