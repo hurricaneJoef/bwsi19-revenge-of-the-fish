@@ -34,45 +34,45 @@ class statematch:
             #TODO for race pf
             
             if self.go:
-            
+            print("zoom")
             else:
                 self.go=greenlight(self.camera_data.cv_image)
 		print self.go
         elif self.state==1:
-            #TODO turnpike between lines full speed
+            print("")#TODO turnpike between lines full speed
         elif self.state==2:
-            #TODO end turnpike left wall
+            print("")#TODO end turnpike left wall
         elif self.state==3:
-            #TODO left wall follower
+            print("")#TODO left wall follower
             
         elif self.state==4:
-            #TODO beaver baller pf/ car wash
+            print("")#TODO beaver baller pf/ car wash
         elif self.state==5:
-            #TODO graveyard pf
+            print("")#TODO graveyard pf
         elif self.state==6:
-            #TODO python path  lwf
+            print("")#TODO python path  lwf
         elif self.state==7:
-            #TODO other way turnpike full speed
+            print("")#TODO other way turnpike full speed
         elif self.state==8:
-            #TODO  end of turnpike right wall /bob's brick bypass
+            print("")#TODO  end of turnpike right wall /bob's brick bypass
         elif self.state==9:
-            #TODO bridge pf
+            print("")#TODO bridge pf
         elif self.state==10:
-            #TODO 10 singdirthen wall follower
+            print("")#TODO 10 singdirthen wall follower
         elif self.state==11:
-            #TODO rwf/pf
+            print("")#TODO rwf/pf
         elif self.state==12:
-            #TODO pf
-        elif self.state==13
-            #TODO pf
-        elif self.state==14
-            #TODO pf
-        elif self.state==15
-            #TODO rwf
-        elif self.state==16
-            #TODO rwf
-        elif self.state==17
-            #TODO 17 full speed then pull over
+            print("")#TODO pf
+        elif self.state==13:
+            print("")#TODO pf
+        elif self.state==14:
+            print("")#TODO pf
+        elif self.state==15:
+            print("")#TODO rwf
+        elif self.state==16:
+            print("")#TODO rwf
+        elif self.state==17:
+            print("")#TODO 17 full speed then pull over
         else:
             self.state=0
     
@@ -232,6 +232,6 @@ class statematch:
             turn-=0.5
         self.finalVector[1]=turn
 if __name__ == "__main__":
-    rospy.init_node('state machine')
+    rospy.init_node('state_machine')
     state_drive = statematch()
     rospy.spin()
