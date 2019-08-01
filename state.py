@@ -11,7 +11,9 @@ from cv_bridge import CvBridge, CvBridgeError
 class statematch:
     SCAN_TOPIC = "/scan"
     DRIVE_TOPIC = "/drive"
-
+    kpfv=1
+    kpf=.1
+    krearforce=100
     def __init__(self):
         print("suffering")
         self.data = None
@@ -48,7 +50,7 @@ class statematch:
         elif self.state==5:
             #TODO graveyard pf
         elif self.state==6:
-            #TODO python path  pf
+            #TODO python path  lwf
         elif self.state==7:
             #TODO other way turnpike full speed
         elif self.state==8:
@@ -60,7 +62,7 @@ class statematch:
         elif self.state==11:
             #TODO rwf/pf
         elif self.state==12:
-            #TODO rwf
+            #TODO pf
         elif self.state==13
             #TODO pf
         elif self.state==14
@@ -76,7 +78,7 @@ class statematch:
     
     def scan_callback(self, data):
         '''Checks LIDAR data'''
-        self.data = data.ranges
+        self.data = data
         self.drive_callback()
 
     def drive_callback(self):
@@ -187,16 +189,33 @@ class statematch:
         pix_width  = box[1][0] - box[0][0]
         pix_height = box[1][1] - box[0][1]    
         return pix_width*pix_height   
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
+    def pol2cart(self,r, theta):
+       	x = r * np.cos(theta)
+       	y = r * np.sin(theta)
+       	return(x, y)
+    def cart2pol(self,x,y):
+       	rho = np.sqrt(x**2 + y**2)
+        phi = np.arctan2(y, x)
+        return(rho, phi)
+    def pf(self,data):
+        force=[]
+        for i in data.ranges:
+            x,y=self.pol2cart(self.kpf/(i**3),   data.range.index(i)*data.angle_increment-np.pi/4)
+            force.append([x,y])
+        force.append([0,self.krearforce])
+        total=np.sum(force, axis=0)
+        speed,angle=self.cart2pol(total[0],total[1])
+        angle-=np.pi/2
+        speed*=self.kpfv
+        return speed,angle
+        
+        
+        
+        
+        
+        
+        
+        
            
     def bang_bang_go(self, points):
         desired_dis=3
