@@ -279,7 +279,7 @@ class statematch:
         
         
         
-    def drive(speed,angle):
+    def drive(self,speed,angle):
         self.finalVector=[speed,angle]       
     def bang_bang_go(self, points):
         desired_dis=3
