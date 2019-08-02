@@ -42,7 +42,8 @@ class statematch:
         self.roll = 0
         self.pitch = 0
         self.yaw = 0
-
+        self.dir=0
+        self.go=False
         self.targetx = 0
         self.targety = 0
     
