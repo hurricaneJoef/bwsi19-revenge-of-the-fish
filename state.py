@@ -80,8 +80,8 @@ class statematch:
             print("")#TODO bridge pf
         elif self.state==10:
             print("")#TODO 10 singdirthen wall follower
-	        dirnow=self.signdir(self.camera_data.cv_image
-        	if abs(dirnow) > 0:
+            dirnow=self.signdir(self.camera_data.cv_image
+            if abs(dirnow) > 0:
                 self.dir=dirnow
             print(self.dir)
         elif self.state==11:
@@ -216,14 +216,14 @@ class statematch:
     
         x1, y1, x2, y2 = 0, 0, 0, 0
         if len(contours) != 0:
-    	# find contour with max area, which is most likely the cone
+        # find contour with max area, which is most likely the cone
             # Solution note: max uses an anonymous function in this case, we can also use a loop...
             contours_max = max(contours, key = cv2.contourArea)
     
-    	# Find bounding box coordinates
+        # Find bounding box coordinates
             x1, y1, x2, y2 = cv2.boundingRect(contours_max)
     
-    	# Draw the bounding rectangle
+        # Draw the bounding rectangle
             cv2.rectangle(img, (x1, y1), (x1 + x2, y1 + y2), (0, 255, 0), 2)
     
         if show_image:
