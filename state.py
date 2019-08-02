@@ -172,7 +172,7 @@ class statematch:
                output+=1
        rospy.loginfo("output: {}".format(output))
        return output
-   import cv2
+    import cv2
     #import imutils
     import numpy as np
     import pdb
