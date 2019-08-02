@@ -85,7 +85,7 @@ class statematch:
             dirnow=self.signdir(self.camera_data.cv_image)
             if dirnow != 0:
                 self.dir=dirnow
-            print(self.dir)
+            print("sign dir:"+str(self.dir))
         elif self.state==11:
             print("")#TODO rwf/pf
         elif self.state==12:
