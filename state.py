@@ -83,6 +83,7 @@ class statematch:
         elif self.state==10:
             None#TODO 10 singdirthen wall follower
             dirnow=self.signdir(self.camera_data.cv_image)
+            print("dirnow:"+str(dirnow))
             if dirnow != 0:
                 self.dir=dirnow
             print("sign dir:"+str(self.dir))
