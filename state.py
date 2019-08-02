@@ -79,6 +79,10 @@ class statematch:
             print("")#TODO bridge pf
         elif self.state==10:
             print("")#TODO 10 singdirthen wall follower
+	    dirnow=self.signdir(self.camera_data.cv_image
+	    if(dirnow!=0):
+                self.dir=dirnow
+            print(self.dir)
         elif self.state==11:
             print("")#TODO rwf/pf
         elif self.state==12:
@@ -174,8 +178,10 @@ class statematch:
                output-=1
            if np.max(rress)>= threshold:
                output+=1
-       rospy.loginfo("output: {}".format(output))
-       return output
+       rospy.loginfo("output: {}".format(output)
+       if self.lastdir==output:
+           return output
+       self.lastdir=output
     import cv2
     #import imutils
     import numpy as np
