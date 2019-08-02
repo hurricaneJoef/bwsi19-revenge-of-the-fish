@@ -245,8 +245,8 @@ class statematch:
         box=cd_color_segmentation(img,colorval=[[ 31, 154, 16],[ 61, 255, 217]])
         if box[1][1]>150:
             if self.size_calc(box)>400:
-                return true
-        return false
+                return True
+        return False
     def size_calc(self,box):
         """ calculate the x and y size of the box in pixels"""
         pix_width  = box[1][0] - box[0][0]
