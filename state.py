@@ -178,7 +178,7 @@ class statematch:
     import pdb
 
     def cd_color_segmentation(img,colorval=[[ 31, 154, 16],[ 61, 255, 217]], show_image=False):
-            """
+        """
             Implement the cone detection using color segmentation algorithm
             Input:
             img: np.3darray; the input image with a cone to be detected
@@ -225,9 +225,9 @@ class statematch:
         #return img
         return ((x1, y1), (x1 + x2, y1 + y2))    
     def size_calc(self,data):
-		""" calculate the x and y size of the box in pixels"""
-		size=[data[0][0]-data[1][0],data[1][1]-data[0][1]]
-		return size       
+	""" calculate the x and y size of the box in pixels"""
+	size=[data[0][0]-data[1][0],data[1][1]-data[0][1]]
+	return size       
     def greenlight(self,img):
         box=cd_color_segmentation(img,colorval=[[ 31, 154, 16],[ 61, 255, 217]])
         if box[1][1]>150:
