@@ -46,6 +46,7 @@ class statematch:
         self.go=False
         self.targetx = 0
         self.targety = 0
+        self.lastdir=0
     
     def statepic(self):
         #TODO save ar tag val
