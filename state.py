@@ -57,7 +57,7 @@ class statematch:
                 print("zoom")
                 self.drive(self.pf(self.data))
             else:
-                self.go=greenlight(self.camera_data.cv_image)
+                self.go=self.greenlight(self.camera_data.cv_image)
                 self.drive(0,0)
                 print self.go
         elif self.state==1:
