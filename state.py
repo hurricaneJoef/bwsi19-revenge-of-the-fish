@@ -22,7 +22,7 @@ class statematch:
         self.camera_data = Zed_converter(False, save_image = False)
         #write your publishers and subscribers here; they should be the same as the wall follower's   
         self.laser_sub = rospy.Subscriber(self.SCAN_TOPIC, LaserScan, self.scan_callback, queue_size=1)
-        self.ar_sub = rospy.Subscriber(AR_TOPIC, AlvarMarkers, self.arCallback)
+        self.ar_sub = rospy.Subscriber(self.AR_TOPIC, AlvarMarkers, self.arCallback)
         self.sound_sub = rospy.Subscriber("state", String, self.sound)
         self.sound_pub = rospy.Publisher("state", String, queue_size=1)
         self.drive_pub = rospy.Publisher(self.DRIVE_TOPIC, AckermannDriveStamped, queue_size=1)
