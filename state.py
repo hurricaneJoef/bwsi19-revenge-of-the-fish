@@ -137,7 +137,7 @@ class statematch:
     def drive_callback(self):
         '''Publishes drive commands'''
         #make sure to publish cmd here
-        self.state
+        self.statepic
         self.cmd.drive.speed = self.finalVector[0]
         self.cmd.drive.steering_angle = self.finalVector[1]
         self.drive_pub.publish(self.cmd)
