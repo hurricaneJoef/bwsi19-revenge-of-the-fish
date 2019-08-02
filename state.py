@@ -6,11 +6,12 @@ import rospy, copy, time
 from newZed import Zed_converter
 from sensor_msgs.msg import LaserScan, Joy, Image
 from ackermann_msgs.msg import AckermannDriveStamped
-#from color_segmentation import cd_color_segmentation
+from color_segmentation import cd_color_segmentation
 from cv_bridge import CvBridge, CvBridgeError
 class statematch:
     SCAN_TOPIC = "/scan"
     DRIVE_TOPIC = "/drive"
+    AR_TOPIC = "/ar_pose_marker"
     kpfv=1
     kpf=.1
     krearforce=100
@@ -21,11 +22,25 @@ class statematch:
         self.camera_data = Zed_converter(False, save_image = False)
         #write your publishers and subscribers here; they should be the same as the wall follower's   
         self.laser_sub = rospy.Subscriber(self.SCAN_TOPIC, LaserScan, self.scan_callback, queue_size=1)
+        self.ar_sub = rospy.Subscriber(AR_TOPIC, AlvarMarkers, self.arCallback)
+        self.sound_sub = rospy.Subscriber("state", String, self.sound)
+        self.sound_pub = rospy.Publisher("state", String, queue_size=1)
         self.drive_pub = rospy.Publisher(self.DRIVE_TOPIC, AckermannDriveStamped, queue_size=1)
         #cartesian points -- to be filled (tuples)
-
+        self.state=0
         #[speed, angle]
         self.finalVector = [3, 0]
+        self.state = "9"
+        self.x = 0
+        self.y = 0
+        self.z = 0
+        self.euler = None
+        self.roll = 0
+        self.pitch = 0
+        self.yaw = 0
+
+        self.targetx = 0
+        self.targety = 0
     
     def statepic(self):
         #TODO save ar tag val
@@ -34,10 +49,11 @@ class statematch:
             #TODO for race pf
             
             if self.go:
-            print("zoom")
+                print("zoom")
+                self.drive(self.pf(self.data))
             else:
                 self.go=greenlight(self.camera_data.cv_image)
-		print self.go
+                print self.go
         elif self.state==1:
             print("")#TODO turnpike between lines full speed
         elif self.state==2:
@@ -75,6 +91,33 @@ class statematch:
             print("")#TODO 17 full speed then pull over
         else:
             self.state=0
+    def sound(self, state):
+        if state != None:
+            a = 0
+            
+    def findPos(self, data):
+        self.x = data.pose.pose.position.x
+        self.y = data.pose.pose.position.y
+        self.z = data.pose.pose.position.z
+
+        self.euler = self.quatToAng3D(data.pose.pose.orientation)
+        self.roll = euler[0]
+        self.pitch = euler[1]
+        self.yaw = euler[2]
+        
+    def arCallback(self, tags):
+        '''Callback when an AR tag is detected'''
+        #TODO: Write your state changes here
+        if self.state != "1" and self.state != "2" and self.state != "5" and self.cmd.drive.speed == 0:
+            if tags.markers[i].id == 1:
+                self.state = "1"
+            elif tags.markers[i].id == 2:
+                self.state = "2"
+            elif tags.markers[i].id == 5:
+                self.state = "5"
+        print tags
+        pass
+    
     
     def scan_callback(self, data):
         '''Checks LIDAR data'''
@@ -84,10 +127,17 @@ class statematch:
     def drive_callback(self):
         '''Publishes drive commands'''
         #make sure to publish cmd here
-        self.bang_bang_go(self.data)
+        self.state
         self.cmd.drive.speed = self.finalVector[0]
         self.cmd.drive.steering_angle = self.finalVector[1]
         self.drive_pub.publish(self.cmd)
+        
+    def quatToAng3D(self, quat):
+        euler = euler_from_quaternion((quat.x,quat.y,quat.z,quat.w))
+        return euler
+    
+    
+    
     def signdir(self,img,threshold=.6,bestmatch=False):
        img_rgb = img
        img_gray = cv2.cvtColor(img_rgb, cv2.COLOR_BGR2GRAY)
@@ -96,9 +146,9 @@ class statematch:
 #        lres = cv2.matchTemplate(bw,template,cv2.TM_CCOEFF_NORMED)
 #        template = cv2.imread("images/RIGHT.png",0)
 #        rres = cv2.matchTemplate(bw,template,cv2.TM_CCOEFF_NORMED)
-       template = cv2.imread("images/LEFTS.png",0)
+       template = cv2.imread("LEFTS.png",0)
        lress = cv2.matchTemplate(bw,template,cv2.TM_CCOEFF_NORMED)
-       template = cv2.imread("images/RIGHTS.png",0)
+       template = cv2.imread("RIGHTS.png",0)
        rress = cv2.matchTemplate(bw,template,cv2.TM_CCOEFF_NORMED)
 #        template = cv2.imread("images/LEFTxS.png",0)
 #        lresxs = cv2.matchTemplate(bw,template,cv2.TM_CCOEFF_NORMED)
@@ -107,10 +157,10 @@ class statematch:
        output=0
        if(bestmatch):
            output = 0
-#            if(np.max(lres)<np.max(rres)):
-#                output=1
-#            else:
-#                output=-1
+            if(np.max(lres)<np.max(rres)):
+                output=1
+            else:
+                output=-1
        else:
 #            if(np.max(lres) >= threshold) or (np.max(lress)>= threshold) or (np.max(lresxs)>= threshold):
 #                output-=1
@@ -128,13 +178,13 @@ class statematch:
     import pdb
 
     def cd_color_segmentation(img,colorval=[[ 31, 154, 16],[ 61, 255, 217]], show_image=False):
-        """
-	    Implement the cone detection using color segmentation algorithm
-	        Input:
-	        img: np.3darray; the input image with a cone to be detected
-    	    Return:
-	        bbox: ((x1, y1), (x2, y2)); the bounding box of the cone, unit in px
-	    	    (x1, y1) is the bottom left of the bbox and (x2, y2) is the top right of the bbox
+            """
+            Implement the cone detection using color segmentation algorithm
+            Input:
+            img: np.3darray; the input image with a cone to be detected
+            Return:
+            bbox: ((x1, y1), (x2, y2)); the bounding box of the cone, unit in px
+            (x1, y1) is the bottom left of the bbox and (x2, y2) is the top right of the bbox
         """
         # convert from rgb to hsv color space (it might be BGR)
         new_img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
@@ -216,7 +266,8 @@ class statematch:
         
         
         
-           
+    def drive(speed,angle):
+        self.finalVector=[speed,angle]       
     def bang_bang_go(self, points):
         desired_dis=3
         point_far=points[len(points)/3]
