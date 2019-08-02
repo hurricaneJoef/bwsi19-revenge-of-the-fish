@@ -34,7 +34,7 @@ class statematch:
         self.state=0
         #[speed, angle]
         self.finalVector = [3, 0]
-        self.state = "9"
+        #self.state = "9"
         self.x = 0
         self.y = 0
         self.z = 0
