@@ -203,8 +203,8 @@ class statematch:
 
         # define lower and upper bound of image values
         # TO DO!
-        low_range  = colorval[0]
-        high_range = colorval[1] #120,255,255
+        low_range  = np.array(colorval[0])
+        high_range = np.array(colorval[1]) #120,255,255
     
         # create mask for image with overlapping values
         mask = cv2.inRange(new_img, low_range, high_range)
