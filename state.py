@@ -262,8 +262,8 @@ class statematch:
         return(rho, phi)
     def pf(self,data):
         force=[]
-        for i in data.ranges:
-            x,y=self.pol2cart(self.kpf/(i**3),   data.range.index(i)*data.angle_increment-np.pi/4)
+        for i in range(len(data.ranges)):
+            x,y=self.pol2cart(self.kpf/(data.ranges[i]**3),  i*data.angle_increment-np.pi/4)
             force.append([x,y])
         force.append([0,self.krearforce])
         total=np.sum(force, axis=0)
