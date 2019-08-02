@@ -179,7 +179,7 @@ class statematch:
                output-=1
            if np.max(rress)>= threshold:
                output+=1
-       rospy.loginfo("output: {}".format(output)
+       rospy.loginfo("output: {}".format(output))
        if self.lastdir==output:
            return output
        self.lastdir=output
