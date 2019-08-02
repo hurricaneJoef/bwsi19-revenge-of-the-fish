@@ -31,7 +31,7 @@ class statematch:
         self.sound_pub = rospy.Publisher("state", String, queue_size=1)
         self.drive_pub = rospy.Publisher(self.DRIVE_TOPIC, AckermannDriveStamped, queue_size=1)
         #cartesian points -- to be filled (tuples)
-        self.state=9
+        self.state=10
         #[speed, angle]
         self.finalVector = [3, 0]
         #self.state = "9"
@@ -49,7 +49,7 @@ class statematch:
     
     def statepic(self):
         #TODO save ar tag val
-        print self.state
+        print "state:"+str(self.state)
         if self.state==0:
             #TODO for race pf
             
@@ -80,7 +80,7 @@ class statematch:
         elif self.state==9:
             print("")#TODO bridge pf
         elif self.state==10:
-            print("")#TODO 10 singdirthen wall follower
+            None#TODO 10 singdirthen wall follower
             dirnow=self.signdir(self.camera_data.cv_image)
             if dirnow != 0:
                 self.dir=dirnow
