@@ -80,8 +80,8 @@ class statematch:
             print("")#TODO bridge pf
         elif self.state==10:
             print("")#TODO 10 singdirthen wall follower
-	    dirnow=self.signdir(self.camera_data.cv_image
-	    if abs(dirnow) > 0:
+	        dirnow=self.signdir(self.camera_data.cv_image
+        	if abs(dirnow) > 0:
                 self.dir=dirnow
             print(self.dir)
         elif self.state==11:
