@@ -185,6 +185,7 @@ class statematch:
        if self.lastdir==output:
            return output
        self.lastdir=output
+       return(0)
     import cv2
     #import imutils
     import numpy as np
