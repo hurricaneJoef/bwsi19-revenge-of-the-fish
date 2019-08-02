@@ -157,10 +157,10 @@ class statematch:
        output=0
        if(bestmatch):
            output = 0
-            if(np.max(lres)<np.max(rres)):
-                output=1
-            else:
-                output=-1
+           if(np.max(lres)<np.max(rres)):
+               output=1
+           else:
+               output=-1
        else:
 #            if(np.max(lres) >= threshold) or (np.max(lress)>= threshold) or (np.max(lresxs)>= threshold):
 #                output-=1
