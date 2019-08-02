@@ -6,6 +6,7 @@ import rospy, copy, time
 from newZed import Zed_converter
 from sensor_msgs.msg import LaserScan, Joy, Image
 from ackermann_msgs.msg import AckermannDriveStamped
+from ar_track_alvar_msgs.msg import AlvarMarkers
 from color_segmentation import cd_color_segmentation
 from cv_bridge import CvBridge, CvBridgeError
 class statematch:
