@@ -19,6 +19,7 @@ class statematch:
     kpfv=1
     kpf=.1
     krearforce=100
+    testar=10
     def __init__(self):
         print("suffering")
         self.data = None
@@ -128,8 +129,8 @@ class statematch:
             s,a=self.select_bin(self.data.ranges)
             s,a=self.sef(s,a,self.data.ranges)
             self.drive(s,a)#TODO 17 full speed then pull over
-        else:
-            self.state=0
+        elif self.state==22 or self.state==23:
+            self.state=self.testar
             self.go=False
             print("yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet ")
     def sound(self, state):
@@ -157,7 +158,7 @@ class statematch:
 ##            elif tags.markers[i].id == 5:
 #/                self.state = "5"
 	if len(tags.markers)>0:
-		if tags.markers[0].id>0:
+		if tags.markers[0].id>0 and tags.markers[0].id<24:
         		self.state = tags.markers[0].id
         	pass
     
