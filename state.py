@@ -274,31 +274,32 @@ class statematch:
         angle-=np.pi/2
         speed*=self.kpfv
         return speed , angle
-    def select_bin(self, points):
-        chop=15
-        mod_data=[None for x in range(0,chop)]
-        x=0
-        while x < chop:
-            mod_data[x]=points[x*len(points.ranges)/chop:(x+1)*len(points.ranges)/chop]
-            mod_data[x]=sum(mod_data[x])/len(mod_data[x])
-            x+=1
-        print(mod_data)
-        highest=None
-        x_pos=None
-        for point in mod_data:
-            if highest == None:
-                if mod_data.index(point.ranges)>chop/6:
-                    highest=mod_data[mod_data.index(point.ranges)]
-                    x_pos=mod_data.index(point.ranges)
-            elif highest<mod_data[mod_data.index(point.ranges)]:
-                if mod_data.index(point.ranges)>chop/6 and mod_data.index(point.ranges)<5*chop/6:
-                    highest=mod_data[mod_data.index(point.ranges)]
-                    x_pos=mod_data.index(point.ranges)
-        print("bin: "+str(x_pos))
-        angle=x_pos/float(chop)+0.5/float(chop)
-        angle=angle*2-1
-        print(angle)
-        return 1.5, angle    
+    def select_bin(points):
+    chop=15
+    mod_data=[None for x in range(0,chop)]
+    x=0
+    while x < chop:
+        mod_data[x]=points[x*len(points)/chop:(x+1)*len(points)/chop]
+        mod_data[x]=sum(mod_data[x])/len(mod_data[x])
+        x+=1
+    print(mod_data)
+    highest=None
+    x_pos=None
+    for point in mod_data:
+        if highest == None:
+            if mod_data.index(point)>chop/6:
+                highest=mod_data[mod_data.index(point)]
+                x_pos=mod_data.index(point)
+        elif highest<mod_data[mod_data.index(point)]:
+            if mod_data.index(point)>chop/6 and mod_data.index(point)<5*chop/6:
+                highest=mod_data[mod_data.index(point)]
+                x_pos=mod_data.index(point)
+    print("bin: "+str(x_pos))
+    angle=x_pos/float(chop)+0.5/float(chop)
+    angle=angle*2-1
+    angle*=0.7
+    print(angle)
+    return 1.5,angle  
         
         
         
