@@ -31,7 +31,7 @@ class statematch:
         self.sound_pub = rospy.Publisher("state", String, queue_size=1)
         self.drive_pub = rospy.Publisher(self.DRIVE_TOPIC, AckermannDriveStamped, queue_size=1)
         #cartesian points -- to be filled (tuples)
-        self.state=10
+        self.state=0
         #[speed, angle]
         self.finalVector = [3, 0]
         #self.state = "9"
