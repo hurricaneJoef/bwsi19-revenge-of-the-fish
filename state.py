@@ -300,7 +300,11 @@ class statematch:
         angle*=0.7
         print(angle)
         return 1.5,angle  
-        
+    def sef(self,speed,angle,points):
+        if min(points[0:360])<.5 or min(points[720:1080])<.5:
+            angle=0
+        return speed angle
+
         
         
         
