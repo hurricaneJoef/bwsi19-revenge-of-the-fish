@@ -86,6 +86,7 @@ class statematch:
             self.drive(s,a)#TODO beaver baller pf/ car wash
         elif self.state==5:
             s,a=self.select_bin(self.data.ranges)
+            a=self.sef(a,self.data.ranges)
             self.drive(s,a)#TODO graveyard pf
         elif self.state==6:
             s,a=self.select_bin(self.data.ranges)
@@ -106,12 +107,12 @@ class statematch:
             if dirnow != 0:
                 self.dir=dirnow
             print("sign dir:"+str(self.dir))
-            self.drive(1,self.wf(self.dir,0.7))
+            self.drive(1,self.wf(self.dir,0.6))
         elif self.state==11:
             s,a=self.select_bin(self.data.ranges)
             self.drive(s,a)#TODO rwf/pf
         elif self.state==12:
-            self.drive(2,self.wf(1,1))#TODO pf
+            self.drive(1,self.wf(-1,0.7)#TODO pf
         elif self.state==13:
             s,a=self.select_bin(self.data.ranges)
             self.drive(s,a)#TODO pf
@@ -122,7 +123,7 @@ class statematch:
             s,a=self.select_bin(self.data.ranges)
             self.drive(s,a)#TODO rwf
         elif self.state==16:
-            print("")#TODO rwf
+            self.drive(1,self.wf(1,0.7)#TODO rwf
         elif self.state==17:
             s,a=self.select_bin(self.data.ranges)
             self.drive(s,a)#TODO 17 full speed then pull over
@@ -156,7 +157,8 @@ class statematch:
 #/                self.state = "5"
 	if len(tags.markers)>0:
 		if tags.markers[0].id>0:
-        		self.state = tags.markers[0].id
+		    if tags.markers[0].id<20:
+                        self.state = tags.markers[0].id
         	pass
     def buttonCallback(self, data):
 	if data.buttons[1]==1:
@@ -196,7 +198,7 @@ class statematch:
         dist = self.right()
 	print(dist)
         disi = self.righi()
-        if dist > distin-0.5:
+        if dist > distin-0.3:
             if dist > distin and disi < 180:
                 angle = -0.3
             if dist > distin and disi < 240:
@@ -237,7 +239,7 @@ class statematch:
         self.cmd.drive.speed = 1
         dist = self.left()
         disi = self.lefi()
-        if dist > distin-0.5:
+        if dist > distin-0.3:
             if dist > distin and disi > 900:
                 angle = 0.3
             elif dist > distin and disi > 760:
