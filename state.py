@@ -69,9 +69,9 @@ class statematch:
             print("")#TODO left wall follower
             
         elif self.state==4:
-            print("")#TODO beaver baller pf/ car wash
+            self.drive(self.pf(self.data))#TODO beaver baller pf/ car wash
         elif self.state==5:
-            print("")#TODO graveyard pf
+            self.drive(self.pf(self.data))#TODO graveyard pf
         elif self.state==6:
             print("")#TODO python path  lwf
         elif self.state==7:
@@ -79,7 +79,7 @@ class statematch:
         elif self.state==8:
             print("")#TODO  end of turnpike right wall /bob's brick bypass
         elif self.state==9:
-            print("")#TODO bridge pf
+            self.drive(self.pf(self.data))#TODO bridge pf
         elif self.state==10:
             None#TODO 10 singdirthen wall follower
             dirnow=self.signdir(self.camera_data.cv_image)
@@ -90,17 +90,17 @@ class statematch:
         elif self.state==11:
             print("")#TODO rwf/pf
         elif self.state==12:
-            print("")#TODO pf
+            self.drive(self.pf(self.data))#TODO pf
         elif self.state==13:
-            print("")#TODO pf
+            self.drive(self.pf(self.data))#TODO pf
         elif self.state==14:
-            print("")#TODO pf
+            self.drive(self.pf(self.data))#TODO pf
         elif self.state==15:
             print("")#TODO rwf
         elif self.state==16:
             print("")#TODO rwf
         elif self.state==17:
-            print("")#TODO 17 full speed then pull over
+            self.drive(self.pf(self.data))#TODO 17 full speed then pull over
         else:
             self.state=0
     def sound(self, state):
