@@ -185,28 +185,28 @@ class statematch:
         euler = euler_from_quaternion((quat.x,quat.y,quat.z,quat.w))
         return euler
     
-    def wf(self,dir):
+    def wf(self,dir,dist):
         if dir == 1:
-            return self.right_wall_follow()
+            return self.right_wall_follow(dist)
         elif dir == -1:
-            return self.left_wall_follow()
+            return self.left_wall_follow(dist)
         else:
             return 0
-    def right_wall_follow(self):
+    def right_wall_follow(self,distin):
         # if lidar data has not been received, do nothing
         if self.data == None:
             print "No data"
             return 0
         dist = self.right()
         disi = self.righi()
-        if dist > 0.5:
-            if dist > 1 and disi < 180:
+        if dist > distin-0.5:
+            if dist > distin and disi < 180:
                 angle = -0.3
-            if dist > 1 and disi < 240:
+            if dist > distin and disi < 240:
                 angle = -0.05
-            elif dist > 1 and disi > 240:
+            elif dist > distin and disi > 240:
                 angle = 0.05
-            elif dist > 1:
+            elif dist > distin:
                 angle = 0
             else:
                 ang = disi-180
@@ -232,7 +232,7 @@ class statematch:
                 smallest = self.data.ranges[i]
                 index = i
         return index
-    def left_wall_follow(self):
+    def left_wall_follow(self,distin):
         # if lidar data has not been received, do nothing
         if self.data == None:
             print "No data"
@@ -240,14 +240,14 @@ class statematch:
         self.cmd.drive.speed = 1
         dist = self.left()
         disi = self.lefi()
-        if dist > 0.5:
-            if dist > 1 and disi > 900:
+        if dist > distin-0.5:
+            if dist > distin and disi > 900:
                 angle = 0.3
-            elif dist > 1 and disi > 760:
+            elif dist > distin and disi > 760:
                 angle = 0.05
-            elif dist > 1 and disi < 760:
+            elif dist > distin and disi < 760:
                 angle = -0.05
-            elif dist > 1:
+            elif dist > distin:
                 angle = 0
             else:
                 ang = 84-disi
