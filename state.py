@@ -16,10 +16,10 @@ class statematch:
     SCAN_TOPIC = "/scan"
     DRIVE_TOPIC = "/drive"
     AR_TOPIC = "/ar_pose_marker"
+    BUTTON_TOPIC = "/vesc/joy"
     kpfv=1
     kpf=.1
     krearforce=100
-    testar=10
     def __init__(self):
         print("suffering")
         self.data = None
@@ -31,6 +31,7 @@ class statematch:
         self.sound_sub = rospy.Subscriber("state", String, self.sound)
         self.sound_pub = rospy.Publisher("state", String, queue_size=1)
         self.drive_pub = rospy.Publisher(self.DRIVE_TOPIC, AckermannDriveStamped, queue_size=1)
+	self.button_sub= rospy.Subscriber(BUTTON_TOPIC, Joy, buttonCallback, queue_size=1)
         #cartesian points -- to be filled (tuples)
         self.state=0
         #[speed, angle]
@@ -43,11 +44,12 @@ class statematch:
         self.roll = 0
         self.pitch = 0
         self.yaw = 0
-        self.dir=1
-        self.go=False
+        self.dir=0
+        self.go=True
         self.targetx = 0
         self.targety = 0
         self.lastdir=0
+	self.start_button_on=False
     
     def statepic(self):
         #TODO save ar tag val
@@ -103,10 +105,11 @@ class statematch:
             if dirnow != 0:
                 self.dir=dirnow
             print("sign dir:"+str(self.dir))
-            self.wf(self.dir)
-        elif self.state==12:
-            self.wf(1)#TODO rwf/pf
         elif self.state==11:
+            s,a=self.select_bin(self.data.ranges)
+            s,a=self.sef(s,a,self.data.ranges)
+            self.drive(s,a)#TODO rwf/pf
+        elif self.state==12:
             s,a=self.select_bin(self.data.ranges)
             s,a=self.sef(s,a,self.data.ranges)
             self.drive(s,a)#TODO pf
@@ -128,8 +131,8 @@ class statematch:
             s,a=self.select_bin(self.data.ranges)
             s,a=self.sef(s,a,self.data.ranges)
             self.drive(s,a)#TODO 17 full speed then pull over
-        elif self.state==22 or self.state==23:
-            self.state=self.testar
+        else:
+            self.state=0
             self.go=False
             print("yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet ")
     def sound(self, state):
@@ -157,10 +160,14 @@ class statematch:
 ##            elif tags.markers[i].id == 5:
 #/                self.state = "5"
 	if len(tags.markers)>0:
-		if tags.markers[0].id>0 and tags.markers[0].id<24:
+		if tags.markers[0].id>0:
         		self.state = tags.markers[0].id
         	pass
-    
+    def buttonCallback(self, data):
+	if data.buttons[1]==1:
+		self.start_button_on= True
+	else:
+		self.start_button_on= False
     
     def scan_callback(self, data):
         '''Checks LIDAR data'''
@@ -333,93 +340,8 @@ class statematch:
         angle*=0.7
         #print(angle)
         return 1.5,angle  
-    def wf(self,dir):
-        if dir == 1:
-            self.right_wall_follow()
-        elif dir == -1:
-            self.left_wall_follow()
-    def right_wall_follow(self):
-        # if lidar data has not been received, do nothing
-        if self.data == None:
-            print "No data"
-            return 0
-        self.cmd.drive.speed = 1
-        dist = self.right()
-        disi = self.righi()
-        if dist > 0.5:
-            if dist > 1 and disi < 180:
-                self.cmd.drive.steering_angle = -0.3
-            if dist > 1 and disi < 240:
-                self.cmd.drive.steering_angle = -0.05
-            elif dist > 1 and disi > 240:
-                self.cmd.drive.steering_angle = 0.05
-            elif dist > 1:
-                self.cmd.drive.steering_angle = 0
-            else:
-                ang = disi-180
-                self.cmd.drive.steering_angle = ang/1000.0
-        else:
-            self.cmd.drive.steering_angle = 0.3
-        print "angle", self.cmd.drive.steering_angle
-        #make sure to publish cmd here
-        self.drive_pub.publish(self.cmd)
-    def right(self):
-        smallest = 1000
-        index = 0
-        for i in range(300):
-            if self.data.ranges[i] < smallest:
-                smallest = self.data.ranges[i]
-                index = i
-        return smallest
-    def righi(self):
-        smallest = 1000
-        index = 0
-        for i in range(300):
-            if self.data.ranges[i] < smallest:
-                smallest = self.data.ranges[i]
-                index = i
-        return index
-    def left_wall_follow(self):
-        # if lidar data has not been received, do nothing
-        if self.data == None:
-            print "No data"
-            return 0
-        self.cmd.drive.speed = 1
-        dist = self.left()
-        disi = self.lefi()
-        if dist > 0.5:
-            if dist > 1 and disi > 900:
-                self.cmd.drive.steering_angle = 0.3
-            elif dist > 1 and disi > 760:
-                self.cmd.drive.steering_angle = 0.05
-            elif dist > 1 and disi < 760:
-                self.cmd.drive.steering_angle = -0.05
-            elif dist > 1:
-                self.cmd.drive.steering_angle = 0
-            else:
-                ang = 84-disi
-                self.cmd.drive.steering_angle = ang/1000.0
-        else: 
-            self.cmd.drive.steering_angle = -0.3
-        print "angle", self.cmd.drive.steering_angle
-        #make sure to publish cmd here
-        self.drive_pub.publish(self.cmd)
-    def left(self):
-        smallest = 1000
-        index = 0
-        for i in range(300):
-            if self.data.ranges[i+780] < smallest:
-                smallest = self.data.ranges[i+780]
-                index = i+780
-        return smallest
-    def lefi(self):
-        smallest = 1000
-        index = 0
-        for i in range(300):
-            if self.data.ranges[i+780] < smallest:
-                smallest = self.data.ranges[i+780]
-                index = i+780
-        return index     
+        
+        
         
         
         
