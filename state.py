@@ -187,9 +187,11 @@ class statematch:
     
     def wf(self,dir):
         if dir == 1:
-            self.right_wall_follow()
+            return self.right_wall_follow()
         elif dir == -1:
-            self.left_wall_follow()
+            return self.left_wall_follow()
+        else:
+            return 0
     def right_wall_follow(self):
         # if lidar data has not been received, do nothing
         if self.data == None:
