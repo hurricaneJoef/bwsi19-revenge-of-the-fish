@@ -197,26 +197,25 @@ class statematch:
         if self.data == None:
             print "No data"
             return 0
-        self.cmd.drive.speed = 1
         dist = self.right()
         disi = self.righi()
         if dist > 0.5:
             if dist > 1 and disi < 180:
-                self.cmd.drive.steering_angle = -0.3
+                angle = -0.3
             if dist > 1 and disi < 240:
-                self.cmd.drive.steering_angle = -0.05
+                angle = -0.05
             elif dist > 1 and disi > 240:
-                self.cmd.drive.steering_angle = 0.05
+                angle = 0.05
             elif dist > 1:
-                self.cmd.drive.steering_angle = 0
+                angle = 0
             else:
                 ang = disi-180
-                self.cmd.drive.steering_angle = ang/1000.0
+                angle = ang/1000.0
         else:
-            self.cmd.drive.steering_angle = 0.3
-        print "angle", self.cmd.drive.steering_angle
+           angle = 0.3
+        print "angle", angle
         #make sure to publish cmd here
-        self.drive_pub.publish(self.cmd)
+	return angle
     def right(self):
         smallest = 1000
         index = 0
@@ -243,21 +242,21 @@ class statematch:
         disi = self.lefi()
         if dist > 0.5:
             if dist > 1 and disi > 900:
-                self.cmd.drive.steering_angle = 0.3
+                angle = 0.3
             elif dist > 1 and disi > 760:
-                self.cmd.drive.steering_angle = 0.05
+                angle = 0.05
             elif dist > 1 and disi < 760:
-                self.cmd.drive.steering_angle = -0.05
+                angle = -0.05
             elif dist > 1:
-                self.cmd.drive.steering_angle = 0
+                angle = 0
             else:
                 ang = 84-disi
-                self.cmd.drive.steering_angle = ang/1000.0
+                angle = ang/1000.0
         else: 
-            self.cmd.drive.steering_angle = -0.3
-        print "angle", self.cmd.drive.steering_angle
+            angle = -0.3
+        print "angle", angle
         #make sure to publish cmd here
-        self.drive_pub.publish(self.cmd)
+	return angle
     def left(self):
         smallest = 1000
         index = 0
