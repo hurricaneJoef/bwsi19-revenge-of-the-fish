@@ -104,9 +104,9 @@ class statematch:
                 self.dir=dirnow
             print("sign dir:"+str(self.dir))
             self.wf(self.dir)
-        elif self.state==11:
-            self.wf(1)#TODO rwf/pf
         elif self.state==12:
+            self.wf(1)#TODO rwf/pf
+        elif self.state==11:
             s,a=self.select_bin(self.data.ranges)
             s,a=self.sef(s,a,self.data.ranges)
             self.drive(s,a)#TODO pf
