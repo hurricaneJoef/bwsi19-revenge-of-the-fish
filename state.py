@@ -112,7 +112,7 @@ class statematch:
             s,a=self.select_bin(self.data.ranges)
             self.drive(s,a)#TODO rwf/pf
         elif self.state==12:
-            self.drive(1,self.wf(-1,0.7)#TODO pf
+            self.drive(1,self.wf(-1,0.7))#TODO pf
         elif self.state==13:
             s,a=self.select_bin(self.data.ranges)
             self.drive(s,a)#TODO pf
@@ -123,7 +123,7 @@ class statematch:
             s,a=self.select_bin(self.data.ranges)
             self.drive(s,a)#TODO rwf
         elif self.state==16:
-            self.drive(1,self.wf(1,0.7)#TODO rwf
+            self.drive(1,self.wf(1,0.7))#TODO rwf
         elif self.state==17:
             s,a=self.select_bin(self.data.ranges)
             self.drive(s,a)#TODO 17 full speed then pull over
