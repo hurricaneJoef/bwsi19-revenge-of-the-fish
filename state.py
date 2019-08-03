@@ -287,13 +287,13 @@ class statematch:
         x_pos=None
         for point in mod_data:
            if highest == None:
-                if mod_data.index(point)>chop/6:
-                    highest=mod_data[mod_data.index(point)]
-                    x_pos=mod_data.index(point)
-            elif highest<mod_data[mod_data.index(point)]:
-                if mod_data.index(point)>chop/6 and mod_data.index(point)<5*chop/6:
-                    highest=mod_data[mod_data.index(point)]
-                    x_pos=mod_data.index(point)
+               if mod_data.index(point)>chop/6:
+                   highest=mod_data[mod_data.index(point)]
+                   x_pos=mod_data.index(point)
+           elif highest<mod_data[mod_data.index(point)]:
+               if mod_data.index(point)>chop/6 and mod_data.index(point)<5*chop/6:
+                   highest=mod_data[mod_data.index(point)]
+                   x_pos=mod_data.index(point)
         print("bin: "+str(x_pos))
         angle=x_pos/float(chop)+0.5/float(chop)
         angle=angle*2-1
