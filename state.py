@@ -69,7 +69,7 @@ class statematch:
                 self.drive(0,0)
                 print self.go
         elif self.state==1:
-            if min(self.date.ranges[160:200])>1.5:
+            if min(self.data.ranges[160:200])>1.5:
                 self.drive(5,self.wf(1,1))#TODO turnpike between lines full speed
             else:
                 s,a=self.select_bin(self.data.ranges)
