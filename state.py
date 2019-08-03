@@ -50,13 +50,13 @@ class statematch:
     
     def statepic(self):
         #TODO save ar tag val
-        #print "state:"+str(self.state)
+        print "state:"+str(self.state)
         if self.state==0:
             #TODO for race pf
-            print self.greenlight(self.camera_data.cv_image)
+            #print self.greenlight(self.camera_data.cv_image)
             if self.go:
-                #print("zoom")
-		s,a=self.pf(self.data)
+                print("zoom")
+		s,a=self.select_bin(self.data)
                 self.drive(s,a)
             else:
                 self.go=self.greenlight(self.camera_data.cv_image)
