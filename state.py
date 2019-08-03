@@ -121,15 +121,16 @@ class statematch:
     def arCallback(self, tags):
         '''Callback when an AR tag is detected'''
         #TODO: Write your state changes here
-        if self.state != "1" and self.state != "2" and self.state != "5" and self.cmd.drive.speed == 0:
-            if tags.markers[i].id == 1:
-                self.state = "1"
-            elif tags.markers[i].id == 2:
-                self.state = "2"
-            elif tags.markers[i].id == 5:
-                self.state = "5"
-        print tags
-        pass
+  #      if self.state != "1" and self.state != "2" and self.state != "5" and self.cmd.drive.speed == 0
+		#if tags.markers[i].id == 1:
+                #self.state = "1"
+            #elif tags.markers[i].id == 2:
+             #   self.state = "2"
+##            elif tags.markers[i].id == 5:
+#/                self.state = "5"
+	if len(tags.markers)>0
+        	self.state = tags.markers[0].id
+        	pass
     
     
     def scan_callback(self, data):
