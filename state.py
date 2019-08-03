@@ -69,37 +69,35 @@ class statematch:
                 self.drive(0,0)
                 print self.go
         elif self.state==1:
-            self.drive(2,self.wf(1,1))#TODO turnpike between lines full speed
+            if min(self.date.ranges[160:200])>1.5:
+                self.drive(5,self.wf(1,1))#TODO turnpike between lines full speed
+            else:
+                s,a=self.select_bin(self.data.ranges)
+                self.drive(2,a)
         elif self.state==2:
             s,a=self.select_bin(self.data.ranges)
-            s,a=self.sef(s,a,self.data.ranges)
             self.drive(s,a)#TODO end turnpike left wall
         elif self.state==3:
             s,a=self.select_bin(self.data.ranges)
-            s,a=self.sef(s,a,self.data.ranges)
             self.drive(s,a)#TODO left wall follower
             
         elif self.state==4:
             s,a=self.select_bin(self.data.ranges)
-            s,a=self.sef(s,a,self.data.ranges)
             self.drive(s,a)#TODO beaver baller pf/ car wash
         elif self.state==5:
             s,a=self.select_bin(self.data.ranges)
-            s,a=self.sef(s,a,self.data.ranges)
             self.drive(s,a)#TODO graveyard pf
         elif self.state==6:
             s,a=self.select_bin(self.data.ranges)
-            s,a=self.sef(s,a,self.data.ranges)
             self.drive(s,a)#TODO python path  lwf
         elif self.state==7:
-            print("")#TODO other way turnpike full speed
+            s,a=self.select_bin(self.data.ranges)
+            self.drive(5,a)#TODO other way turnpike full speed
         elif self.state==8:
             s,a=self.select_bin(self.data.ranges)
-            s,a=self.sef(s,a,self.data.ranges)
             self.drive(s,a)#TODO  end of turnpike right wall /bob's brick bypass
         elif self.state==9:
             s,a=self.select_bin(self.data.ranges)
-            s,a=self.sef(s,a,self.data.ranges)
             self.drive(s,a)#TODO bridge pf
         elif self.state==10:
             None#TODO 10 singdirthen wall follower
@@ -111,27 +109,22 @@ class statematch:
             self.drive(1,self.wf(self.dir,0.7))
         elif self.state==11:
             s,a=self.select_bin(self.data.ranges)
-            s,a=self.sef(s,a,self.data.ranges)
             self.drive(s,a)#TODO rwf/pf
         elif self.state==12:
             self.drive(2,self.wf(1,1))#TODO pf
         elif self.state==13:
             s,a=self.select_bin(self.data.ranges)
-            s,a=self.sef(s,a,self.data.ranges)
             self.drive(s,a)#TODO pf
         elif self.state==14:
             s,a=self.select_bin(self.data.ranges)
-            s,a=self.sef(s,a,self.data.ranges)
             self.drive(s,a)#TODO pf
         elif self.state==15:
             s,a=self.select_bin(self.data.ranges)
-            s,a=self.sef(s,a,self.data.ranges)
             self.drive(s,a)#TODO rwf
         elif self.state==16:
             print("")#TODO rwf
         elif self.state==17:
             s,a=self.select_bin(self.data.ranges)
-            s,a=self.sef(s,a,self.data.ranges)
             self.drive(s,a)#TODO 17 full speed then pull over
         else:
             self.state=0
