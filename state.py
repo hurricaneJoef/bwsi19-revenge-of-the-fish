@@ -284,7 +284,7 @@ class statematch:
             x+=1
         print(mod_data)
         highest=None
-       x_pos=None
+        x_pos=None
         for point in mod_data:
            if highest == None:
                 if mod_data.index(point)>chop/6:
