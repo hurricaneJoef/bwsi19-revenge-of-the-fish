@@ -55,7 +55,7 @@ class statematch:
             #TODO for race pf
             print self.greenlight(self.camera_data.cv_image)
             if self.go:
-                print("zoom")
+                #print("zoom")
 		s,a=self.pf(self.data)
                 self.drive(s,a)
             else:
