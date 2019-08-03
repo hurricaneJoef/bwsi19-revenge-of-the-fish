@@ -56,7 +56,7 @@ class statematch:
             
             if self.go:
                 print("zoom")
-                self.drive(self.pf(self.data))
+                self.drive(self.select_bin(self.data))
             else:
                 self.go=self.greenlight(self.camera_data.cv_image)
                 self.drive(0,0)
@@ -69,9 +69,9 @@ class statematch:
             print("")#TODO left wall follower
             
         elif self.state==4:
-            self.drive(self.pf(self.data))#TODO beaver baller pf/ car wash
+            self.drive(self.select_bin(self.data))#TODO beaver baller pf/ car wash
         elif self.state==5:
-            self.drive(self.pf(self.data))#TODO graveyard pf
+            self.drive(self.select_bin(self.data))#TODO graveyard pf
         elif self.state==6:
             print("")#TODO python path  lwf
         elif self.state==7:
@@ -90,11 +90,11 @@ class statematch:
         elif self.state==11:
             print("")#TODO rwf/pf
         elif self.state==12:
-            self.drive(self.pf(self.data))#TODO pf
+            self.drive(self.select_bin(self.data))#TODO pf
         elif self.state==13:
-            self.drive(self.pf(self.data))#TODO pf
+            self.drive(self.select_bin(self.data))#TODO pf
         elif self.state==14:
-            self.drive(self.pf(self.data))#TODO pf
+            self.drive(self.select_bin(self.data))#TODO pf
         elif self.state==15:
             print("")#TODO rwf
         elif self.state==16:
@@ -273,7 +273,31 @@ class statematch:
         angle-=np.pi/2
         speed*=self.kpfv
         return speed,angle
-        
+    def select_bin(self, points):
+        chop=15
+        mod_data=[None for x in range(0,chop)]
+        x=0
+        while x < chop:
+            mod_data[x]=points[x*len(points)/chop:(x+1)*len(points)/chop]
+            mod_data[x]=sum(mod_data[x])/len(mod_data[x])
+            x+=1
+        print(mod_data)
+        highest=None
+        x_pos=None
+        for point in mod_data:
+            if highest == None:
+                if mod_data.index(point)>chop/6:
+                    highest=mod_data[mod_data.index(point)]
+                    x_pos=mod_data.index(point)
+            elif highest<mod_data[mod_data.index(point)]:
+                if mod_data.index(point)>chop/6 and mod_data.index(point)<5*chop/6:
+                    highest=mod_data[mod_data.index(point)]
+                    x_pos=mod_data.index(point)
+        print("bin: "+str(x_pos))
+        angle=x_pos/float(chop)+0.5/float(chop)
+        angle=angle*2-1
+        print(angle)
+        return(1.5,angle)    
         
         
         
