@@ -44,7 +44,7 @@ class statematch:
         self.pitch = 0
         self.yaw = 0
         self.dir=1
-        self.go=True
+        self.go=False
         self.targetx = 0
         self.targety = 0
         self.lastdir=0
