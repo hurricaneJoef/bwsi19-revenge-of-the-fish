@@ -31,7 +31,7 @@ class statematch:
         self.sound_sub = rospy.Subscriber("state", String, self.sound)
         self.sound_pub = rospy.Publisher("state", String, queue_size=1)
         self.drive_pub = rospy.Publisher(self.DRIVE_TOPIC, AckermannDriveStamped, queue_size=1)
-	self.button_sub= rospy.Subscriber(BUTTON_TOPIC, Joy, buttonCallback, queue_size=1)
+	self.button_sub= rospy.Subscriber(self.BUTTON_TOPIC, Joy, buttonCallback, queue_size=1)
         #cartesian points -- to be filled (tuples)
         self.state=0
         #[speed, angle]
