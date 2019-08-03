@@ -131,6 +131,8 @@ class statematch:
             self.drive(s,a)#TODO 17 full speed then pull over
         else:
             self.state=0
+            self.go=False
+            print("yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet yeet ")
     def sound(self, state):
         if state != None:
             a = 0
@@ -313,7 +315,7 @@ class statematch:
             mod_data[x]=points[x*len(points)/chop:(x+1)*len(points)/chop]
             mod_data[x]=sum(mod_data[x])/len(mod_data[x])
             x+=1
-        print(mod_data)
+        #print(mod_data)
         highest=None
         x_pos=None
         for point in mod_data:
@@ -329,7 +331,7 @@ class statematch:
         angle=x_pos/float(chop)+0.5/float(chop)
         angle=angle*2-1
         angle*=0.7
-        print(angle)
+        #print(angle)
         return 1.5,angle  
         
         
