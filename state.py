@@ -56,7 +56,7 @@ class statematch:
             #print self.greenlight(self.camera_data.cv_image)
             if self.go:
                 print("zoom")
-		s,a=self.select_bin(self.data)
+		s,a=self.select_bin(self.data.ranges)
                 self.drive(s,a)
             else:
                 self.go=self.greenlight(self.camera_data.cv_image)
@@ -70,9 +70,9 @@ class statematch:
             print("")#TODO left wall follower
             
         elif self.state==4:
-            self.drive(self.select_bin(self.data))#TODO beaver baller pf/ car wash
+            self.drive(self.select_bin(self.data.ranges))#TODO beaver baller pf/ car wash
         elif self.state==5:
-            self.drive(self.select_bin(self.data))#TODO graveyard pf
+            self.drive(self.select_bin(self.data.ranges))#TODO graveyard pf
         elif self.state==6:
             print("")#TODO python path  lwf
         elif self.state==7:
@@ -80,7 +80,7 @@ class statematch:
         elif self.state==8:
             print("")#TODO  end of turnpike right wall /bob's brick bypass
         elif self.state==9:
-            self.drive(self.select_bin(self.data))#TODO bridge pf
+            self.drive(self.select_bin(self.data.ranges))#TODO bridge pf
         elif self.state==10:
             None#TODO 10 singdirthen wall follower
             dirnow=self.signdir(self.camera_data.cv_image)
@@ -91,17 +91,17 @@ class statematch:
         elif self.state==11:
             print("")#TODO rwf/pf
         elif self.state==12:
-            self.drive(self.select_bin(self.data))#TODO pf
+            self.drive(self.select_bin(self.data.ranges))#TODO pf
         elif self.state==13:
-            self.drive(self.select_bin(self.data))#TODO pf
+            self.drive(self.select_bin(self.data.ranges))#TODO pf
         elif self.state==14:
-            self.drive(self.select_bin(self.data))#TODO pf
+            self.drive(self.select_bin(self.data.ranges))#TODO pf
         elif self.state==15:
             print("")#TODO rwf
         elif self.state==16:
             print("")#TODO rwf
         elif self.state==17:
-            self.drive(self.pf(self.data))#TODO 17 full speed then pull over
+            self.drive(self.pf(self.data.ranges))#TODO 17 full speed then pull over
         else:
             self.state=0
     def sound(self, state):
