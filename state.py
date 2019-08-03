@@ -274,7 +274,7 @@ class statematch:
         angle-=np.pi/2
         speed*=self.kpfv
         return speed , angle
-    def select_bin(points):
+    def select_bin(self,points):
         chop=15
         mod_data=[None for x in range(0,chop)]
         x=0
