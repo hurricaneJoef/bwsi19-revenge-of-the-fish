@@ -180,10 +180,10 @@ class statematch:
         return euler
     
     
-    def sef(self,speed,angle,points):
+    def sef(self,angle,points):
         if min(points[0:360])<.3 or min(points[720:1080])<.3:
             angle=0
-        return speed,angle
+        return angle
     def signdir(self,img,threshold=.6,bestmatch=False):
        img_rgb = img
        img_gray = cv2.cvtColor(img_rgb, cv2.COLOR_BGR2GRAY)
