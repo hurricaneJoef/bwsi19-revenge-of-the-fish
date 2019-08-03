@@ -157,7 +157,8 @@ class statematch:
 ##            elif tags.markers[i].id == 5:
 #/                self.state = "5"
 	if len(tags.markers)>0:
-        	self.state = tags.markers[0].id
+		if tags.markers[0].id>0:
+        		self.state = tags.markers[0].id
         	pass
     
     
