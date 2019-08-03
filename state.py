@@ -57,7 +57,7 @@ class statematch:
             if self.go:
                 print("zoom")
 		s,a=self.select_bin(self.data.ranges)
-		s,a=self.sef(s,a,self.data.ranges)
+		a=self.sef(a,self.data.ranges)
                 self.drive(s,a)
             else:
                 self.go=self.greenlight(self.camera_data.cv_image)
