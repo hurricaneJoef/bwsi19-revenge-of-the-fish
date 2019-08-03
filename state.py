@@ -201,6 +201,7 @@ class statematch:
             print "No data"
             return 0
         dist = self.right()
+	print(dist)
         disi = self.righi()
         if dist > distin-0.5:
             if dist > distin and disi < 180:
