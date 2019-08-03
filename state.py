@@ -223,7 +223,7 @@ class statematch:
     def right(self):
         smallest = 1000
         index = 0
-        for i in range(300):
+        for i in range(50,300):
             if self.data.ranges[i] < smallest:
                 smallest = self.data.ranges[i]
                 index = i
@@ -231,7 +231,7 @@ class statematch:
     def righi(self):
         smallest = 1000
         index = 0
-        for i in range(300):
+        for i in range(50,300):
             if self.data.ranges[i] < smallest:
                 smallest = self.data.ranges[i]
                 index = i
@@ -264,7 +264,7 @@ class statematch:
     def left(self):
         smallest = 1000
         index = 0
-        for i in range(300):
+        for i in range(250):
             if self.data.ranges[i+780] < smallest:
                 smallest = self.data.ranges[i+780]
                 index = i+780
@@ -272,7 +272,7 @@ class statematch:
     def lefi(self):
         smallest = 1000
         index = 0
-        for i in range(300):
+        for i in range(250):
             if self.data.ranges[i+780] < smallest:
                 smallest = self.data.ranges[i+780]
                 index = i+780
