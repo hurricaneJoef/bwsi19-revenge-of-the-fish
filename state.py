@@ -53,7 +53,7 @@ class statematch:
         print "state:"+str(self.state)
         if self.state==0:
             #TODO for race pf
-            
+            print self.greenlight(self.camera_data.cv_image)
             if self.go:
                 print("zoom")
 		s,a=self.pf(self.data)
