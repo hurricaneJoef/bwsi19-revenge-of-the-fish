@@ -181,7 +181,7 @@ class statematch:
     
     
     def sef(self,speed,angle,points):
-        if min(points[0:360])<.5 or min(points[720:1080])<.5:
+        if min(points[0:360])<.3 or min(points[720:1080])<.3:
             angle=0
         return speed,angle
     def signdir(self,img,threshold=.6,bestmatch=False):
