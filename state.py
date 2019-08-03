@@ -80,7 +80,7 @@ class statematch:
         elif self.state==8:
             print("")#TODO  end of turnpike right wall /bob's brick bypass
         elif self.state==9:
-            self.drive(self.pf(self.data))#TODO bridge pf
+            self.drive(self.select_bin(self.data))#TODO bridge pf
         elif self.state==10:
             None#TODO 10 singdirthen wall follower
             dirnow=self.signdir(self.camera_data.cv_image)
