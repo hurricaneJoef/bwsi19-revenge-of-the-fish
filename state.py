@@ -50,7 +50,7 @@ class statematch:
     
     def statepic(self):
         #TODO save ar tag val
-        print "state:"+str(self.state)
+        #print "state:"+str(self.state)
         if self.state==0:
             #TODO for race pf
             print self.greenlight(self.camera_data.cv_image)
