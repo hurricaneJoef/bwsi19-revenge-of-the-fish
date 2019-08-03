@@ -66,7 +66,7 @@ class statematch:
                 self.drive(0,0)
                 print self.go
         elif self.state==1:
-            print("")#TODO turnpike between lines full speed
+            self.drive(2,self.wf(1),1)#TODO turnpike between lines full speed
         elif self.state==2:
             s,a=self.select_bin(self.data.ranges)
             s,a=self.sef(s,a,self.data.ranges)
@@ -105,13 +105,13 @@ class statematch:
             if dirnow != 0:
                 self.dir=dirnow
             print("sign dir:"+str(self.dir))
-            self.drive(1,self.wf(self.dir))
+            self.drive(1,self.wf(self.dir,0.7))
         elif self.state==11:
             s,a=self.select_bin(self.data.ranges)
             s,a=self.sef(s,a,self.data.ranges)
             self.drive(s,a)#TODO rwf/pf
         elif self.state==12:
-            self.drive(2,self.wf(1))#TODO pf
+            self.drive(2,self.wf(1),1)#TODO pf
         elif self.state==13:
             s,a=self.select_bin(self.data.ranges)
             s,a=self.sef(s,a,self.data.ranges)
