@@ -193,7 +193,7 @@ class statematch:
     import numpy as np
     import pdb
 
-    def cd_color_segmentation(img,colorval=[[ 31, 154, 16],[ 61, 255, 217]], show_image=False):
+    def cd_color_segmentation(img,colorval=[[ 52, 66, 61],[ 98, 255, 148]], show_image=False):
         """
             Implement the cone detection using color segmentation algorithm
             Input:
