@@ -247,7 +247,7 @@ class statematch:
     def greenlight(self,img):
         box=cd_color_segmentation(img,colorval=[[ 31, 109, 16],[ 84, 255, 255]])#[21, 129, 63],[83, 255, 205]
         if box[1][1]<150:
-            if abs(self.size_calc(box)-400)<100:
+            if abs(self.size_calc(box)-400)<200:
                 return True
         return False
     def size_calc(self,box):
