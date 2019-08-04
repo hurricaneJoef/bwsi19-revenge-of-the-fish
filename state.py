@@ -118,7 +118,7 @@ class statematch:
             s,a=self.select_bin(self.data.ranges)
             self.drive(s,a)#TODO rwf/pf
         elif self.state==12:
-            self.drive(1,self.wf(-1,0.7))#TODO pf
+            self.drive(1,self.wf(-1,0.6))#TODO pf
         elif self.state==13:
             s,a=self.select_bin(self.data.ranges)
             self.drive(s,a)#TODO pf
