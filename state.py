@@ -95,14 +95,10 @@ class statematch:
             s,a=self.select_bin(self.data.ranges)
             self.drive(s,a)#TODO python path  lwf
         elif self.state==7:
-            if min(self.data.ranges[160:200])>1.5:
-                self.drive(5,self.wf(1,1))#TODO turnpike between lines full speed
-            else:
-                s,a=self.select_bin(self.data.ranges)
-                self.drive(2,a)#TODO other way turnpike full speed
+            self.drive(5,self.wf(1,1))#TODO turnpike between lines full speed
+		#TODO other way turnpike full speed
         elif self.state==8:
-            s,a=self.select_bin(self.data.ranges)
-            self.drive(s,a)#TODO  end of turnpike right wall /bob's brick bypass
+            self.drive(2,self.wf(1,0.7))#TODO  end of turnpike right wall /bob's brick bypass
         elif self.state==9:
             s,a=self.select_bin(self.data.ranges)
             self.drive(s,a)#TODO bridge pf
@@ -113,7 +109,7 @@ class statematch:
             if dirnow != 0:
                 self.dir=dirnow
             print("sign dir:"+str(self.dir))
-            self.drive(1,self.wf(self.dir,0.6))
+            self.drive(1,self.wf(self.dir,0.4))
         elif self.state==11:
             s,a=self.select_bin(self.data.ranges)
             self.drive(s,a)#TODO rwf/pf
@@ -129,7 +125,7 @@ class statematch:
             s,a=self.select_bin(self.data.ranges)
             self.drive(s,a)#TODO rwf
         elif self.state==16:
-            self.drive(1,self.wf(1,0.7))#TODO rwf
+            self.drive(1,self.wf(1,1))#TODO rwf
         elif self.state==17:
             s,a=self.select_bin(self.data.ranges)
             self.drive(s,a)#TODO 17 full speed then pull over
