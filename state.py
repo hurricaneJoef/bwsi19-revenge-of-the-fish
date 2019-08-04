@@ -63,7 +63,7 @@ class statematch:
             if self.go:
                 print("zoom")
 		s,a=self.select_bin(self.data.ranges)
-                self.drive(s,a)
+                self.drive(2,a)
             else:
                 self.go=self.greenlight(self.camera_data.cv_image)
                 self.drive(0,0)
@@ -78,8 +78,11 @@ class statematch:
             s,a=self.select_bin(self.data.ranges)
             self.drive(s,a)#TODO end turnpike left wall
         elif self.state==3:
+            if max(self.data.ranges)>4:
             s,a=self.select_bin(self.data.ranges)
-            self.drive(s,a)#TODO left wall follower
+            self.drive(s,a)
+            else:
+		self.drive(2,self.wf(-1,0.6))#TODO left wall follower
             
         elif self.state==4:
             s,a=self.select_bin(self.data.ranges)
@@ -92,8 +95,11 @@ class statematch:
             s,a=self.select_bin(self.data.ranges)
             self.drive(s,a)#TODO python path  lwf
         elif self.state==7:
-            s,a=self.select_bin(self.data.ranges)
-            self.drive(5,a)#TODO other way turnpike full speed
+            if min(self.data.ranges[160:200])>1.5:
+                self.drive(5,self.wf(1,1))#TODO turnpike between lines full speed
+            else:
+                s,a=self.select_bin(self.data.ranges)
+                self.drive(2,a)#TODO other way turnpike full speed
         elif self.state==8:
             s,a=self.select_bin(self.data.ranges)
             self.drive(s,a)#TODO  end of turnpike right wall /bob's brick bypass
@@ -273,7 +279,7 @@ class statematch:
                 index = i+780
         return index
     def sef(self,angle,points):
-        if min(points[0:360])<.3 or min(points[720:1080])<.3:
+        if min(points[50:450])<.3 or min(points[630:1030])<.4:
             angle=0
         return angle
     def signdir(self,img,threshold=.6,bestmatch=False):
