@@ -52,17 +52,17 @@ class statematch:
 	self.start_button_on=False
     
     def statepic(self):
-        #TODO save ar tag val
         print "state:"+str(self.state)
 	if(self.start_button_on):
             self.state=0
             self.go=False
         if self.state==0:
-            #TODO for race pf
+            #TOD for race pf
             #print self.greenlight(self.camera_data.cv_image)
             if self.go:
                 print("zoom")
 		s,a=self.select_bin(self.data.ranges)
+		a=self.sef(a,self.data.ranges)
                 self.drive(2,a)
             else:
                 self.go=self.greenlight(self.camera_data.cv_image)
@@ -76,7 +76,7 @@ class statematch:
                 self.drive(2,a)
         elif self.state==2:
             s,a=self.select_bin(self.data.ranges)
-            self.drive(s,a)#TODO end turnpike left wall
+            self.drive(s,a)#TOD end turnpike left wall
         elif self.state==3:
             if max(self.data.ranges)>4:
                 s,a=self.select_bin(self.data.ranges)
@@ -108,12 +108,12 @@ class statematch:
             self.drive(s,a)#TODO bridge pf
         elif self.state==10:
             None#TODO 10 singdirthen wall follower
-            dirnow=self.signdir(self.camera_data.cv_image)
+            dirnow=0#self.signdir(self.camera_data.cv_image)
             print("dirnow:"+str(dirnow))
             if dirnow != 0:
                 self.dir=dirnow
             print("sign dir:"+str(self.dir))
-            self.drive(1,self.wf(self.dir,0.4))
+            self.drive(1,self.wf(self.dir,0.5))
         elif self.state==11:
             s,a=self.select_bin(self.data.ranges)
             self.drive(s,a)#TODO rwf/pf
@@ -129,9 +129,9 @@ class statematch:
             s,a=self.select_bin(self.data.ranges)
             self.drive(s,a)#TODO rwf
         elif self.state==16:
-            self.drive(1,self.wf(1,1))#TODO rwf
+            self.drive(2,self.wf(1,1))#TODO rwf
         elif self.state==17:
-            self.drive(1,self.wf(1,1))#TODO 17 full speed then pull over
+            self.drive(2,self.wf(1,1))#TODO 17 full speed then pull over
         else:
             self.state=0
             self.go=False
