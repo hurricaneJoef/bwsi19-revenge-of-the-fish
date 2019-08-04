@@ -82,7 +82,7 @@ class statematch:
                 s,a=self.select_bin(self.data.ranges)
                 self.drive(s,a)
             else:
-		self.drive(2,self.wf(-1,0.6))#TODO left wall follower
+		self.drive(1.5,self.wf(-1,0.6))#TODO left wall follower
             
         elif self.state==4:
             s,a=self.select_bin(self.data.ranges)
