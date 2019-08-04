@@ -79,8 +79,8 @@ class statematch:
             self.drive(s,a)#TODO end turnpike left wall
         elif self.state==3:
             if max(self.data.ranges)>4:
-            s,a=self.select_bin(self.data.ranges)
-            self.drive(s,a)
+                s,a=self.select_bin(self.data.ranges)
+                self.drive(s,a)
             else:
 		self.drive(2,self.wf(-1,0.6))#TODO left wall follower
             
