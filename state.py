@@ -90,7 +90,7 @@ class statematch:
         elif self.state==5:
             s,a=self.select_bin(self.data.ranges)
             a=self.sef(a,self.data.ranges)
-            self.drive(s,a)#TODO graveyard pf
+            self.drive(.7,a)#TODO graveyard pf
         elif self.state==6:
             s,a=self.select_bin(self.data.ranges)
             self.drive(s,a)#TODO python path  lwf
