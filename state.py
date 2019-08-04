@@ -102,7 +102,7 @@ class statematch:
                 self.drive(2,a)#TODO turnpike between lines full speed
 		#TODO other way turnpike full speed
         elif self.state==8:
-            self.drive(2,self.wf(1,0.7))#TODO  end of turnpike right wall /bob's brick bypass
+            self.drive(1.5,self.wf(1,0.5))#TODO  end of turnpike right wall /bob's brick bypass
         elif self.state==9:
             s,a=self.select_bin(self.data.ranges)
             self.drive(s,a)#TODO bridge pf
@@ -129,7 +129,7 @@ class statematch:
             s,a=self.select_bin(self.data.ranges)
             self.drive(s,a)#TODO rwf
         elif self.state==16:
-            self.drive(2,self.wf(1,1))#TODO rwf
+            self.drive(1.5,self.wf(1,1))#TODO rwf
         elif self.state==17:
             self.drive(2,self.wf(1,1))#TODO 17 full speed then pull over
         else:
