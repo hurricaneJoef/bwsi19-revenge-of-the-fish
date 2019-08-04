@@ -278,8 +278,12 @@ class statematch:
                 index = i+780
         return index
     def sef(self,angle,points):
-        if min(points[50:450])<.3 or min(points[630:1030])<.4:
+        if min(points[50:450])<.5 or min(points[630:1030])<.5:
             angle=0
+            if min(points[50:450])<.4:
+                angle=-0.3
+            if min(points[630:1030])<.4:
+                angle=0.3
         return angle
     def signdir(self,img,threshold=.6,bestmatch=False):
        img_rgb = img
