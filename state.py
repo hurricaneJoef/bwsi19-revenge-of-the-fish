@@ -95,7 +95,11 @@ class statematch:
             s,a=self.select_bin(self.data.ranges)
             self.drive(s,a)#TODO python path  lwf
         elif self.state==7:
-            self.drive(5,self.wf(1,1))#TODO turnpike between lines full speed
+            if min(self.data.ranges[160:200])>1.5:
+                self.drive(5,self.wf(1,1))#TODO turnpike between lines full speed
+            else:
+                s,a=self.select_bin(self.data.ranges)
+                self.drive(2,a)#TODO turnpike between lines full speed
 		#TODO other way turnpike full speed
         elif self.state==8:
             self.drive(2,self.wf(1,0.7))#TODO  end of turnpike right wall /bob's brick bypass
