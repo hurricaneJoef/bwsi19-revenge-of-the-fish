@@ -131,8 +131,7 @@ class statematch:
         elif self.state==16:
             self.drive(1,self.wf(1,1))#TODO rwf
         elif self.state==17:
-            s,a=self.select_bin(self.data.ranges)
-            self.drive(s,a)#TODO 17 full speed then pull over
+            self.drive(1,self.wf(1,1))#TODO 17 full speed then pull over
         else:
             self.state=0
             self.go=False
