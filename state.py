@@ -78,7 +78,7 @@ class statematch:
             s,a=self.select_bin(self.data.ranges)
             self.drive(s,a)#TOD end turnpike left wall
         elif self.state==3:
-            if max(self.data.ranges)>4:
+            if max(self.data.ranges)>5:
                 s,a=self.select_bin(self.data.ranges)
                 self.drive(s,a)
             else:
